@@ -5,12 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.ButterKnife;
 import butterknife.BindView;
-
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public abstract class BaseChatActivity extends AppCompatActivity {

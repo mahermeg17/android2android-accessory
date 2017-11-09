@@ -6,13 +6,17 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
+
 
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
 
+
 public class ConnectActivity extends AppCompatActivity {
+
 
     public static final String DEVICE_EXTRA_KEY = "device";
     private UsbManager mUsbManager;

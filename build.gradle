@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId "de.quandoo.android2androidaccessory"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.1"
@@ -32,6 +32,7 @@ android {
     productFlavors {
         host
         device
+        things
     }
 }
 
@@ -39,4 +40,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    thingsCompileOnly 'com.google.android.things:androidthings:+'
 }

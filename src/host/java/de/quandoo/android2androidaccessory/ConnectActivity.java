@@ -8,6 +8,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 public class ConnectActivity extends AppCompatActivity {
 
 
+    public static final String TAG = "ConnectActivity";
     public static final String DEVICE_EXTRA_KEY = "device";
     private UsbManager mUsbManager;
 
@@ -38,7 +40,7 @@ public class ConnectActivity extends AppCompatActivity {
         final HashMap<String, UsbDevice> deviceList = mUsbManager.getDeviceList();
 
         if (deviceList == null || deviceList.size() == 0) {
-            final Intent intent=new Intent(this,InfoActivity.class);
+            final Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
 
             finish();
@@ -49,7 +51,7 @@ public class ConnectActivity extends AppCompatActivity {
             return;
         }
 
-        for (UsbDevice device:deviceList.values()) {
+        for (UsbDevice device : deviceList.values()) {
             initAccessory(device);
         }
 
@@ -57,16 +59,22 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private boolean searchForUsbAccessory(final HashMap<String, UsbDevice> deviceList) {
-        for (UsbDevice device:deviceList.values()) {
-            if (isUsbAccessory(device)) {
-
-                final Intent intent=new Intent(this,ChatActivity.class);
+        for (UsbDevice device : deviceList.values()) {
+            Log.i(TAG, "device found >> VendorId=" + device.getVendorId()
+                    + ", getDeviceId=" + device.getDeviceId()
+                    + ", ProductId=" + device.getProductId()
+                    + ", DeviceProtocol=" + device.getDeviceProtocol());
+            //if (isUsbAccessory(device)) {
+                Log.i(TAG, "device isUsbAccessory >>> " + device.getVendorId()
+                        + ", " + device.getDeviceId()
+                        + ", " + device.getProductId());
+                final Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra(DEVICE_EXTRA_KEY, device);
                 startActivity(intent);
 
                 finish();
                 return true;
-            }
+            //}
         }
 
         return false;

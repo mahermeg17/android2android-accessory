@@ -1,5 +1,6 @@
 package de.quandoo.android2androidaccessory;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
@@ -8,10 +9,17 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import butterknife.BindView;
+import de.quandoo.android2androidaccessory.protocol.command.HeartbeatCmd;
+import de.quandoo.android2androidaccessory.protocol.model.CmdMessage;
 
 public class ChatActivity extends BaseChatActivity {
 
@@ -19,6 +27,29 @@ public class ChatActivity extends BaseChatActivity {
 
     private final AtomicBoolean keepThreadAlive = new AtomicBoolean(true);
     private final List<String> sendBuffer = new ArrayList<>();
+    Activity chatActivity;
+
+    @BindView(R.id.over_conf_cmd)
+    Button overConfCMD;
+
+    private Handler mHandler = new Handler();
+
+
+    final Runnable mRunnable = new Runnable() {
+        public void run() {
+            chatActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    HeartbeatCmd heartbeatCmd = new HeartbeatCmd();
+                    CmdMessage cmdMessage = heartbeatCmd.prepare(null);
+                    String msg = ATTUtils.convertObjectToJson(cmdMessage);
+                    sendString(msg);
+                    MyLog.i(TAG, getString(R.string.local_prompt) + msg);
+                }
+            });
+            mHandler.postDelayed(mRunnable, 1000);
+        }
+    };
 
     @Override
     protected void sendString(final String string) {
@@ -28,6 +59,11 @@ public class ChatActivity extends BaseChatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        overConfCMD.setVisibility(View.VISIBLE);
+
+        chatActivity = this;
+        mHandler.postDelayed(mRunnable, 37000);
 
         new Thread(new CommunicationRunnable()).start();
     }

@@ -10,16 +10,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/heartbeat_cmd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Heartbeat" />
-
-        <Button
             android:id="@+id/over_conf_cmd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Overwrite" />
+            android:text="Overwrite"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

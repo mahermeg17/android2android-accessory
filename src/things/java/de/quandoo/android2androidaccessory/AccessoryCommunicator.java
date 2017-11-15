@@ -83,6 +83,7 @@ public abstract class AccessoryCommunicator {
                 } catch (final Exception e) {
                     onError("USB Receive Failed " + e.toString() + "\n");
                     MyLog.w(TAG, "USB Receive Failed " + e.toString());
+                    e.printStackTrace();
                     closeAccessory();
                 }
             }

@@ -8,9 +8,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.quandoo.android2androidaccessory.manager.CommandExecutionCallback;
-import de.quandoo.android2androidaccessory.protocol.command.HeartbeatCmd;
-import de.quandoo.android2androidaccessory.protocol.model.CmdMessage;
 
 public abstract class BaseChatActivity extends AppCompatActivity {
 
@@ -21,33 +18,6 @@ public abstract class BaseChatActivity extends AppCompatActivity {
 
     @BindView(R.id.input_edittext)
     EditText input;
-
-    CommandExecutionCallback heartbeatCmdCallback = new CommandExecutionCallback() {
-        @Override
-        public void onError() {
-
-        }
-
-        @Override
-        public void onReadingCompleted() {
-
-        }
-
-        @Override
-        public void onReadingMessage() {
-
-        }
-
-        @Override
-        public void onWriteCompleted() {
-
-        }
-
-        @Override
-        public void onWritingChunk() {
-
-        }
-    };
 
     @OnClick(R.id.send_button)
     public void onButtonClick() {
@@ -61,15 +31,6 @@ public abstract class BaseChatActivity extends AppCompatActivity {
         input.setText("");
     }
 
-    @OnClick(R.id.heartbeat_cmd)
-    public void heartbeatCmd() {
-        HeartbeatCmd heartbeatCmd = new HeartbeatCmd();
-        CmdMessage cmdMessage = heartbeatCmd.prepare(null);
-        String msg = ATTUtils.convertObjectToJson(cmdMessage);
-        sendString(msg);
-        printLineToUI(getString(R.string.local_prompt) + msg);
-
-    }
 
     protected abstract void sendString(final String string);
 

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
@@ -46,52 +48,88 @@ public class ConnectActivity extends AppCompatActivity {
             finish();
             return;
         }
-
+        MyLog.i(TAG, "--------- star searching for usb devices -----------");
+        MyLog.i(TAG, " >>> " + new Date().toString() + " >>> " + deviceList.size());
         if (searchForUsbAccessory(deviceList)) {
-            return;
+            // return;
         }
 
         for (UsbDevice device : deviceList.values()) {
             initAccessory(device);
         }
-
+        MyLog.i(TAG, "-------------<<<<<>>>>>-------------");
         finish();
     }
 
     private boolean searchForUsbAccessory(final HashMap<String, UsbDevice> deviceList) {
         for (UsbDevice device : deviceList.values()) {
-            Log.i(TAG, "device found >> VendorId=" + device.getVendorId()
-                    + ", getDeviceId=" + device.getDeviceId()
-                    + ", ProductId=" + device.getProductId()
-                    + ", DeviceProtocol=" + device.getDeviceProtocol());
-            //if (isUsbAccessory(device)) {
-                Log.i(TAG, "device isUsbAccessory >>> " + device.getVendorId()
-                        + ", " + device.getDeviceId()
-                        + ", " + device.getProductId());
+            MyLog.i(TAG, "device " + Build.VERSION.SDK_INT);
+            MyLog.i(TAG, "Build.VERSION.SDK_INT=" + Build.VERSION.SDK_INT);
+            MyLog.i(TAG, "Vendor Id =" + device.getVendorId()
+                    + ", Device Id = " + device.getDeviceId()
+                    + ", Product Id = " + device.getProductId());
+            MyLog.i(TAG, "Product Name = " + device.getDeviceName()
+                    + ", Device Protocol = " + device.getDeviceProtocol());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                MyLog.i(TAG, "Manufacturer Name = " + device.getManufacturerName()
+                        + ", Serial Number = " + device.getSerialNumber()
+                        + ", Product Name = " + device.getProductName()
+                        + ", Device Class = " + device.getDeviceClass()
+                        + ", Device Subclass = " + device.getDeviceSubclass()
+                        + ", Configuration Count = " + device.getConfigurationCount()
+                        + ", Interface Count = " + device.getInterfaceCount());
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                MyLog.i(TAG, "Product Name = " + device.getVersion());
+            }
+
+            if (isUsbAccessory(device)) {
                 final Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra(DEVICE_EXTRA_KEY, device);
                 startActivity(intent);
-
                 finish();
                 return true;
-            //}
+            }
         }
 
+        return true;
+    }
+
+    /**
+     * Android Open Accessory Protocol V2
+     * 0x2d00:11520
+     * 0x2d01:11521
+     * 0x2D02:11522
+     * 0x2D03:11523
+     * 0x2D04:11524
+     * 0x2D05:11525
+     * FT232R
+     * 0x6001:24577
+     *
+     * @param device
+     * @return if device is accessory
+     */
+    private boolean isUsbAccessory(final UsbDevice device) {
+        if ((device.getProductId() == 0x2d00) || (device.getProductId() == 0x2d01)
+                || (device.getProductId() == 0x2d02) || (device.getProductId() == 0x2d03)
+                || (device.getProductId() == 0x2d04) || (device.getProductId() == 0x2d05)
+                || (device.getProductId() == 0x6001)) {
+            MyLog.i(TAG, "isUsbAccessory >>> true");
+            return true;
+        }
+        MyLog.i(TAG, "isUsbAccessory >>> false");
         return false;
     }
 
-    private boolean isUsbAccessory(final UsbDevice device) {
-        return (device.getProductId() == 0x2d00) || (device.getProductId() == 0x2d01);
-    }
-
     private boolean initAccessory(final UsbDevice device) {
-
+        MyLog.i(TAG, "try to init Accessory");
         final UsbDeviceConnection connection = mUsbManager.openDevice(device);
 
         if (connection == null) {
+            MyLog.w(TAG, "connection is null");
             return false;
         }
-
+        MyLog.i(TAG, "Control Transfer");
         initStringControlTransfer(connection, 0, "quandoo"); // MANUFACTURER
         initStringControlTransfer(connection, 1, "Android2AndroidAccessory"); // MODEL
         initStringControlTransfer(connection, 2, "showcasing android2android USB communication"); // DESCRIPTION
@@ -102,7 +140,7 @@ public class ConnectActivity extends AppCompatActivity {
         connection.controlTransfer(0x40, 53, 0, 0, new byte[]{}, 0, Constants.USB_TIMEOUT_IN_MS);
 
         connection.close();
-
+        MyLog.i(TAG, "connection close");
         return true;
     }
 

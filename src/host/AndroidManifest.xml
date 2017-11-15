@@ -7,6 +7,7 @@
             android:screenOrientation="landscape"/>
 
         <activity android:name=".ConnectActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="landscape">
 
             <intent-filter>

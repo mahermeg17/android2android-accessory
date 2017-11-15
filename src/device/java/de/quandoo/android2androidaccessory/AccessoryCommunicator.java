@@ -25,18 +25,22 @@ public abstract class AccessoryCommunicator {
     private static final String TAG = "AccessoryCommunicator";
 
     public AccessoryCommunicator(final Context context) {
+        try {
+            this.context = context;
 
-        this.context = context;
+            usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
 
-        usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
+            final UsbAccessory[] accessoryList = usbManager.getAccessoryList();
 
-        final UsbAccessory[] accessoryList = usbManager.getAccessoryList();
-
-        if (accessoryList == null || accessoryList.length == 0) {
-            onError("no accessory found");
-            Log.i(TAG, "no accessory found");
-        } else {
-            openAccessory(accessoryList[0]);
+            if (accessoryList == null || accessoryList.length == 0) {
+                onError("no accessory found");
+                MyLog.w(TAG, "no accessory found");
+            } else {
+                MyLog.w(TAG, "accessoryList = " + accessoryList.length);
+                openAccessory(accessoryList[0]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -78,7 +82,8 @@ public abstract class AccessoryCommunicator {
                     }
                 } catch (final Exception e) {
                     onError("USB Receive Failed " + e.toString() + "\n");
-                    Log.w(TAG, "USB Receive Failed " + e.toString());
+                    MyLog.w(TAG, "USB Receive Failed " + e.toString());
+                    e.printStackTrace();
                     closeAccessory();
                 }
             }
@@ -86,7 +91,7 @@ public abstract class AccessoryCommunicator {
     }
 
     private void openAccessory(UsbAccessory accessory) {
-        Log.i(TAG, "openAccessory");
+        MyLog.i(TAG, "openAccessory");
         fileDescriptor = usbManager.openAccessory(accessory);
         if (fileDescriptor != null) {
 
@@ -113,7 +118,7 @@ public abstract class AccessoryCommunicator {
     }
 
     public void closeAccessory() {
-        Log.i(TAG, "closeAccessory");
+        MyLog.i(TAG, "closeAccessory");
         running = false;
 
         try {

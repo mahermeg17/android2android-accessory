@@ -1,13 +1,14 @@
 package de.quandoo.android2androidaccessory.protocol.model;
 
-import com.akka.aat.bs.protocol.model.installation.BackupConnectionReport;
-import com.akka.aat.bs.protocol.model.installation.Inventory;
-import com.akka.aat.bs.protocol.model.installation.PrimaryConnectionReport;
-import com.akka.aat.bs.protocol.model.installation.RadioReport;
-import com.akka.aat.bs.protocol.model.installation.ServiceReport;
-import com.akka.aat.bs.protocol.model.installation.Site;
-import com.akka.aat.bs.protocol.model.installation.Tap;
-import com.akka.aat.bs.protocol.model.installation.UserIdentity;
+
+import de.quandoo.android2androidaccessory.protocol.model.installation.BackupConnectionReport;
+import de.quandoo.android2androidaccessory.protocol.model.installation.Inventory;
+import de.quandoo.android2androidaccessory.protocol.model.installation.PrimaryConnectionReport;
+import de.quandoo.android2androidaccessory.protocol.model.installation.RadioReport;
+import de.quandoo.android2androidaccessory.protocol.model.installation.ServiceReport;
+import de.quandoo.android2androidaccessory.protocol.model.installation.Site;
+import de.quandoo.android2androidaccessory.protocol.model.installation.Tap;
+import de.quandoo.android2androidaccessory.protocol.model.installation.UserIdentity;
 
 /**
  * @author Maher.MEGADMINI

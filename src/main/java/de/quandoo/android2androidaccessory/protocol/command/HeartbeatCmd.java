@@ -1,9 +1,10 @@
 package de.quandoo.android2androidaccessory.protocol.command;
 
-import com.akka.aat.bs.manager.CommandExecutionCallback;
-import com.akka.aat.bs.protocol.Command;
-import com.akka.aat.bs.protocol.model.AATCommandArgs;
-import com.akka.aat.bs.protocol.model.CmdMessage;
+
+import de.quandoo.android2androidaccessory.manager.CommandExecutionCallback;
+import de.quandoo.android2androidaccessory.protocol.Command;
+import de.quandoo.android2androidaccessory.protocol.model.AATCommandArgs;
+import de.quandoo.android2androidaccessory.protocol.model.CmdMessage;
 
 /**
  * Created by Maher.MEGADMINI on 07/08/2017.
@@ -18,7 +19,9 @@ public class HeartbeatCmd extends AATCommand implements CommandExecutionCallback
 
     @Override
     public CmdMessage prepare(AATCommandArgs aatCommandArgs) {
-        return null;
+        CmdMessage cmdMessage = new CmdMessage();
+        cmdMessage.setCmd(this.cmd.name());
+        return cmdMessage;
     }
 
 

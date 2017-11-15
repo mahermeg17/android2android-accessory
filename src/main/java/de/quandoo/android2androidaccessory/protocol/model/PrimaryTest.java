@@ -1,6 +1,7 @@
 package de.quandoo.android2androidaccessory.protocol.model;
 
-import com.akka.aat.bs.enums.ConnectionType;
+
+import de.quandoo.android2androidaccessory.enums.ConnectionType;
 
 /**
  * @author Maher.MEGADMINI

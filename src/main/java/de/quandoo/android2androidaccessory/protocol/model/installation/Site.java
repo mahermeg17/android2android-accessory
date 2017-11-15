@@ -1,6 +1,6 @@
 package de.quandoo.android2androidaccessory.protocol.model.installation;
 
-import com.akka.aat.bs.enums.StationInstallationType;
+import de.quandoo.android2androidaccessory.enums.StationInstallationType;
 
 /**
  * @version 1.0

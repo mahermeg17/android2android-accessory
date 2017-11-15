@@ -21,9 +21,9 @@ public class InfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        Log.i("InfoActivity", "onCreate");
+        Log.i("---InfoActivity", "onCreate");
         String ip = getDeviceIpAddress();
-        Log.i("InfoActivity", "Device Address = " + ip);
+        Log.i("---InfoActivity", "Device Address = " + ip);
 
     }
 

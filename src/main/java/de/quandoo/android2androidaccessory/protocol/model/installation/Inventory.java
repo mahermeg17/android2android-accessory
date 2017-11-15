@@ -1,7 +1,8 @@
 package de.quandoo.android2androidaccessory.protocol.model.installation;
 
-import com.akka.aat.bs.enums.CavityFilterType;
-import com.akka.aat.bs.enums.LnaType;
+
+import de.quandoo.android2androidaccessory.enums.CavityFilterType;
+import de.quandoo.android2androidaccessory.enums.LnaType;
 
 /**
  * @version 1.0

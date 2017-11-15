@@ -1,14 +1,16 @@
 package de.quandoo.android2androidaccessory.protocol.command;
 
 
-import com.akka.aat.bs.enums.CommandStatus;
-import com.akka.aat.bs.manager.CommandExecutionCallback;
-import com.akka.aat.bs.protocol.Command;
-import com.akka.aat.bs.protocol.model.AATCommandArgs;
-import com.akka.aat.bs.protocol.model.CmdMessage;
+
 
 import java.util.Date;
 import java.util.List;
+
+import de.quandoo.android2androidaccessory.enums.CommandStatus;
+import de.quandoo.android2androidaccessory.manager.CommandExecutionCallback;
+import de.quandoo.android2androidaccessory.protocol.Command;
+import de.quandoo.android2androidaccessory.protocol.model.AATCommandArgs;
+import de.quandoo.android2androidaccessory.protocol.model.CmdMessage;
 
 public abstract class AATCommand {
 

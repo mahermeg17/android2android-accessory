@@ -1,6 +1,7 @@
 package de.quandoo.android2androidaccessory.protocol.model.installation;
 
-import com.akka.aat.bs.enums.FeederType;
+
+import de.quandoo.android2androidaccessory.enums.FeederType;
 
 /**
  * @author Maher.MEGADMINI

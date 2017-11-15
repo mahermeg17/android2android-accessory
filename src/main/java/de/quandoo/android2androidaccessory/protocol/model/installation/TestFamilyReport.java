@@ -1,9 +1,10 @@
 package de.quandoo.android2androidaccessory.protocol.model.installation;
 
-import com.akka.aat.bs.enums.TestStatus;
 
 import java.io.Serializable;
 import java.util.List;
+
+import de.quandoo.android2androidaccessory.enums.TestStatus;
 
 /**
  * @author Maher.MEGADMINI

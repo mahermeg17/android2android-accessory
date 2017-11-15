@@ -15,5 +15,27 @@ public class CmdMessage {
 
     }
 
+    public String getAns() {
+        return ans;
+    }
 
+    public void setAns(String ans) {
+        this.ans = ans;
+    }
+
+    public String getArg() {
+        return arg;
+    }
+
+    public void setArg(String arg) {
+        this.arg = arg;
+    }
+
+    public String getCmd() {
+        return cmd;
+    }
+
+    public void setCmd(String cmd) {
+        this.cmd = cmd;
+    }
 }

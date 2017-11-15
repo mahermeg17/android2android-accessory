@@ -1,10 +1,10 @@
 package de.quandoo.android2androidaccessory.protocol.command;
 
 
-import com.akka.aat.bs.enums.TestStatus;
-import com.akka.aat.bs.manager.CommandExecutionCallback;
-import com.akka.aat.bs.protocol.model.AATCommandArgs;
-import com.akka.aat.bs.protocol.model.CmdMessage;
+import de.quandoo.android2androidaccessory.enums.TestStatus;
+import de.quandoo.android2androidaccessory.manager.CommandExecutionCallback;
+import de.quandoo.android2androidaccessory.protocol.model.AATCommandArgs;
+import de.quandoo.android2androidaccessory.protocol.model.CmdMessage;
 
 /**
  * @author Maher.MEGADMINI

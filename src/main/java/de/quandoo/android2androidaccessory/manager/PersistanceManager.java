@@ -2,9 +2,10 @@ package de.quandoo.android2androidaccessory.manager;
 
 
 
-import com.akka.aat.bs.protocol.model.installation.UserIdentity;
 
 import java.util.List;
+
+import de.quandoo.android2androidaccessory.protocol.model.installation.UserIdentity;
 
 /**
  * @author Maher.MEGADMINI

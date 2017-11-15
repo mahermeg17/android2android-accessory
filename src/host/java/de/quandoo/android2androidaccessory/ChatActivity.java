@@ -9,22 +9,13 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 
-import android.support.v7.app.AppCompatActivity;
-
-import android.widget.EditText;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import butterknife.ButterKnife;
-
-import butterknife.BindView;
-
-import butterknife.OnClick;
-
 public class ChatActivity extends BaseChatActivity {
+
+    public static final String TAG = "ChatActivity";
 
     private final AtomicBoolean keepThreadAlive = new AtomicBoolean(true);
     private final List<String> sendBuffer = new ArrayList<>();
@@ -47,7 +38,7 @@ public class ChatActivity extends BaseChatActivity {
         public void run() {
             final UsbManager usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
 
-            final UsbDevice device=getIntent().getParcelableExtra(ConnectActivity.DEVICE_EXTRA_KEY);
+            final UsbDevice device = getIntent().getParcelableExtra(ConnectActivity.DEVICE_EXTRA_KEY);
 
             UsbEndpoint endpointIn = null;
             UsbEndpoint endpointOut = null;
@@ -94,12 +85,12 @@ public class ChatActivity extends BaseChatActivity {
                 while (keepThreadAlive.get()) {
                     final int bytesTransferred = connection.bulkTransfer(endpointIn, buff, buff.length, Constants.USB_TIMEOUT_IN_MS);
                     if (bytesTransferred > 0) {
-                        printLineToUI("device> "+new String(buff, 0, bytesTransferred));
+                        printLineToUI("device> " + new String(buff, 0, bytesTransferred));
                     }
 
                     synchronized (sendBuffer) {
-                        if (sendBuffer.size()>0) {
-                            final byte[] sendBuff=sendBuffer.get(0).toString().getBytes();
+                        if (sendBuffer.size() > 0) {
+                            final byte[] sendBuff = sendBuffer.get(0).toString().getBytes();
                             connection.bulkTransfer(endpointOut, sendBuff, sendBuff.length, Constants.USB_TIMEOUT_IN_MS);
                             sendBuffer.remove(0);
                         }

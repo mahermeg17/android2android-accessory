@@ -3,10 +3,12 @@
     package="de.quandoo.android2androidaccessory">
 
     <application>
-        <activity android:name=".ChatActivity"
-            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".ChatActivity"
+            android:screenOrientation="landscape" />
 
-        <activity android:name=".ConnectActivity"
+        <activity
+            android:name=".ConnectActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="landscape">
 

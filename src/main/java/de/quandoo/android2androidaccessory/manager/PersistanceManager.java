@@ -1,8 +1,6 @@
 package de.quandoo.android2androidaccessory.manager;
 
 
-
-
 import java.util.List;
 
 import de.quandoo.android2androidaccessory.protocol.model.installation.UserIdentity;
@@ -29,7 +27,6 @@ public class PersistanceManager {
     public List<UserIdentity> getAllUsers() {
         return null;
     }
-
 
 
     public boolean saveIntervention() {

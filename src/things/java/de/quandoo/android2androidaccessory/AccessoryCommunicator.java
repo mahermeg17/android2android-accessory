@@ -35,7 +35,7 @@ public abstract class AccessoryCommunicator {
                 onError("no accessory found");
                 MyLog.w(TAG, "no accessory found");
             } else {
-                MyLog.w(TAG, "accessoryList = "+accessoryList.length);
+                MyLog.w(TAG, "accessoryList = " + accessoryList.length);
                 openAccessory(accessoryList[0]);
             }
         } catch (Exception e) {

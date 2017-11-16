@@ -1,8 +1,6 @@
 package de.quandoo.android2androidaccessory.protocol.command;
 
 
-
-
 import java.util.Date;
 import java.util.List;
 

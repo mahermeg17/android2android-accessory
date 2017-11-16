@@ -1,7 +1,6 @@
 package de.quandoo.android2androidaccessory.protocol;
 
 
-
 import java.util.List;
 
 import de.quandoo.android2androidaccessory.protocol.model.CmdMessage;

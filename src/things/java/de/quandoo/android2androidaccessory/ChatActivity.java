@@ -1,7 +1,6 @@
 package de.quandoo.android2androidaccessory;
 
 import android.os.Bundle;
-import android.util.Log;
 
 public class ChatActivity extends BaseChatActivity {
 

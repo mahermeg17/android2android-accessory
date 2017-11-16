@@ -7,10 +7,7 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
 
 import java.util.Date;
 import java.util.HashMap;
@@ -63,8 +60,7 @@ public class ConnectActivity extends AppCompatActivity {
 
     private boolean searchForUsbAccessory(final HashMap<String, UsbDevice> deviceList) {
         for (UsbDevice device : deviceList.values()) {
-            MyLog.i(TAG, "device " + Build.VERSION.SDK_INT);
-            MyLog.i(TAG, "Build.VERSION.SDK_INT=" + Build.VERSION.SDK_INT);
+            MyLog.i(TAG, "running android SDK = " + Build.VERSION.SDK_INT);
             MyLog.i(TAG, "Vendor Id =" + device.getVendorId()
                     + ", Device Id = " + device.getDeviceId()
                     + ", Product Id = " + device.getProductId());

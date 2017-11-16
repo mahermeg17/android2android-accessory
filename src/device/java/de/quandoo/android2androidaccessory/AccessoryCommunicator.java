@@ -6,7 +6,6 @@ import android.hardware.usb.UsbManager;
 import android.os.Handler;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
-import android.util.Log;
 
 import java.io.FileDescriptor;
 import java.io.FileInputStream;

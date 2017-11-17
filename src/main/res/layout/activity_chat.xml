@@ -1,39 +1,136 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
     <LinearLayout
+        android:id="@+id/line_0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/over_conf_cmd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Overwrite"
-            android:visibility="gone" />
+            android:text="override_conf" />
 
+        <Button
+            android:id="@+id/get_version_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get_version" />
+
+        <Button
+            android:id="@+id/get_tapid_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get_tapid" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_0">
+
+        <Button
+            android:id="@+id/get_tap_info_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get_tap_info" />
+
+        <Button
+            android:id="@+id/get_saved_inst_t_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get_saved_inst_t" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_1">
+
+        <Button
+            android:id="@+id/get_saved_inst_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get_saved_inst" />
+
+        <Button
+            android:id="@+id/send_inst_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send_inst" />
+
+        <Button
+            android:id="@+id/lna_sc_test_cmd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lna_sc_test" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/msg_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_2">
 
         <TextView
             android:id="@+id/content_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:singleLine="false" />
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/msg_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/input_edittext"
@@ -49,4 +146,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

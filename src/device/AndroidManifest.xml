@@ -6,7 +6,7 @@
 
         <activity
             android:name=".ChatActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />

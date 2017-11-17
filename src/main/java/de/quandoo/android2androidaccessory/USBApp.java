@@ -21,6 +21,11 @@ import java.io.File;
 public class USBApp extends Application {
     private static final boolean DEBUG = true;
     private static final String TAG = "USBApp";
+    public static int USB_ON = 1;
+    public static int USB_OFF = 0;
+    public static int USB_MODE = USB_OFF;
+    public static int HEARTBEAT_FREQUENCY = 10000;
+
 
     @Override
     public void onCreate() {

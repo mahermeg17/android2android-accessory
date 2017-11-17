@@ -88,7 +88,7 @@ public class ConnectActivity extends AppCompatActivity {
             }
         }
 
-        return true;
+        return false;
     }
 
     /**

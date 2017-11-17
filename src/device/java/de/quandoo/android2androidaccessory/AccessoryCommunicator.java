@@ -79,7 +79,7 @@ public abstract class AccessoryCommunicator {
                         Thread.sleep(10);
                         len = inStream.read(msg);
                     }
-                } catch (final Exception e) {
+                } catch (Exception e) {
                     onError("USB Receive Failed " + e.toString() + "\n");
                     MyLog.w(TAG, "USB Receive Failed " + e.toString());
                     e.printStackTrace();
@@ -91,6 +91,7 @@ public abstract class AccessoryCommunicator {
 
     private void openAccessory(UsbAccessory accessory) {
         MyLog.i(TAG, "openAccessory");
+        fileDescriptor = null;
         fileDescriptor = usbManager.openAccessory(accessory);
         if (fileDescriptor != null) {
 
@@ -125,6 +126,7 @@ public abstract class AccessoryCommunicator {
                 fileDescriptor.close();
             }
         } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             fileDescriptor = null;
         }

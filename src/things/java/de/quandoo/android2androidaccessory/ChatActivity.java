@@ -19,13 +19,14 @@ public class ChatActivity extends BaseChatActivity {
                 MyLog.i(TAG, "onReceive");
                 MyLog.i(TAG, "payload=" + payload);
                 printLineToUI("host> " + new String(payload, 0, length));
+                sendString("resend host> " + new String(payload, 0, length));
             }
 
             @Override
             public void onError(String msg) {
-                MyLog.i(TAG, "onError");
-                MyLog.i(TAG, "msg=" + msg);
-                printLineToUI("notify" + msg);
+                MyLog.w(TAG, "onError");
+                MyLog.w(TAG, "msg=" + msg);
+                printLineToUI("notify : " + msg);
             }
 
             @Override

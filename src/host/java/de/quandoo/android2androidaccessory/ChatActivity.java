@@ -31,28 +31,49 @@ public class ChatActivity extends BaseChatActivity {
 
     @BindView(R.id.over_conf_cmd)
     Button overConfCMD;
+    @BindView(R.id.get_version_cmd)
+    Button getVersionCMD;
+    @BindView(R.id.get_tapid_cmd)
+    Button getTapIdCMD;
+    @BindView(R.id.get_tap_info_cmd)
+    Button getTapInfoCMD;
+    @BindView(R.id.get_saved_inst_t_cmd)
+    Button getSavedInstTimeCMD;
+    @BindView(R.id.get_saved_inst_cmd)
+    Button getSavedInstCMD;
+    @BindView(R.id.send_inst_cmd)
+    Button sendInstCMD;
+    @BindView(R.id.lna_sc_test_cmd)
+    Button lnaScTestCMD;
+
+    @BindView(R.id.line_0)
+    View line_0;
+    @BindView(R.id.line_1)
+    View line_1;
 
     private Handler mHandler = new Handler();
-
 
     final Runnable mRunnable = new Runnable() {
         public void run() {
             chatActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    HeartbeatCmd heartbeatCmd = new HeartbeatCmd();
-                    CmdMessage cmdMessage = heartbeatCmd.prepare(null);
-                    String msg = ATTUtils.convertObjectToJson(cmdMessage);
-                    sendString(msg);
-                    MyLog.i(TAG, getString(R.string.local_prompt) + msg);
+                    MyLog.i(TAG, "USB_MODE = " + USBApp.USB_MODE);
+                    if (USBApp.USB_MODE == USBApp.USB_ON) {
+                        HeartbeatCmd heartbeatCmd = new HeartbeatCmd();
+                        CmdMessage cmdMessage = heartbeatCmd.prepare(null);
+                        String msg = ATTUtils.convertObjectToJson(cmdMessage, false);
+                        sendString(msg);
+                    }
                 }
             });
-            mHandler.postDelayed(mRunnable, 1000);
+            mHandler.postDelayed(mRunnable, USBApp.HEARTBEAT_FREQUENCY);
         }
     };
 
     @Override
     protected void sendString(final String string) {
+        MyLog.i(TAG, "try to send : " + getString(R.string.local_prompt) + string);
         sendBuffer.add(string);
     }
 
@@ -60,10 +81,11 @@ public class ChatActivity extends BaseChatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        overConfCMD.setVisibility(View.VISIBLE);
+        line_0.setVisibility(View.VISIBLE);
+        line_1.setVisibility(View.VISIBLE);
 
         chatActivity = this;
-        mHandler.postDelayed(mRunnable, 37000);
+        mHandler.postDelayed(mRunnable, 5000);
 
         new Thread(new CommunicationRunnable()).start();
     }
@@ -119,6 +141,7 @@ public class ChatActivity extends BaseChatActivity {
                 printLineToUI("Claimed interface - ready to communicate");
 
                 while (keepThreadAlive.get()) {
+                    USBApp.USB_MODE = USBApp.USB_ON;
                     final int bytesTransferred = connection.bulkTransfer(endpointIn, buff, buff.length, Constants.USB_TIMEOUT_IN_MS);
                     if (bytesTransferred > 0) {
                         printLineToUI("device> " + new String(buff, 0, bytesTransferred));
@@ -133,7 +156,7 @@ public class ChatActivity extends BaseChatActivity {
                     }
                 }
             }
-
+            USBApp.USB_MODE = USBApp.USB_OFF;
             connection.releaseInterface(usbInterface);
             connection.close();
         }
@@ -142,6 +165,7 @@ public class ChatActivity extends BaseChatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        USBApp.USB_MODE = USBApp.USB_OFF;
         keepThreadAlive.set(false);
     }
 }

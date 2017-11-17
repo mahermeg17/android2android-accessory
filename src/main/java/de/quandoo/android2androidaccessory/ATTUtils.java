@@ -53,10 +53,15 @@ public class ATTUtils {
         return jsonObject;
     }
 
-    public static String convertObjectToJson(Object o) {
+    public static String convertObjectToJson(Object o, boolean serializeNulls) {
         String jsonString;
+        Gson gson;
         try {
-            Gson gson = new GsonBuilder().serializeNulls().setDateFormat("EEE, dd MMM yyyy, HH:mm").create();
+            if (serializeNulls) {
+                gson = new GsonBuilder().serializeNulls().setDateFormat("EEE, dd MMM yyyy, HH:mm").create();
+            } else {
+                gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy, HH:mm").create();
+            }
             jsonString = gson.toJson(o);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
